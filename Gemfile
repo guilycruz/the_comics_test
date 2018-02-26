@@ -1,0 +1,16 @@
+# Gemfile
+source 'https://rubygems.org'
+# source 'http://production.s3.rubygems.org'
+
+gem 'sinatra'
+gem 'rest-client'
+
+group :test do
+  gem "rspec"
+  gem "rack-test"
+end
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  # gem 'byebug', platform: :mri
+end

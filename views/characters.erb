@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Comics Test</title>
+    </head>
+    <body>
+        <% @characters.each do |character| %>
+          <h1> <%= character.name %></h1>
+          <p>  <%= character.description %> </p>
+          <p><img src=<%= character.thumbnail %> alt=<%= character.name %> height="150" width="100"></p>
+        <% end %>
+    </body>
+</html>
