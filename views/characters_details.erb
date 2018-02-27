@@ -1,48 +1,56 @@
-<% @characters.each do |character| %>
-  <div class="row">
-    <div class="col-md-6" style="padding-right:20px; margin-top: 8px; border-right: 1px solid #ccc;">
-      <h1 class="my-4"><%= character.name %>
-        <small style="font-style: italic; color: #c6c6c6">(Id <%= character.id %>)</small>
-      </h1>
-      <div class="row">
-        <div class="col-md-6">
-          <img class="img-fluid" src=<%= character.thumbnail %> alt=<%= character.name %>>
-        </div>
-        <div class="col-md-6">
-          <p><%= character.description.to_s.empty? ? "No description available" : character.description  %></p>
-        </div>
-      </div>
-    </div>
-    <% if @random_story %>
-      <div class="col-md-6" style="padding-right:20px; margin-top: 8px;">
-        <h1 class="my-4"><%= @random_story.name %>
-          <small style="font-style: italic; color: #c6c6c6">(Id <%= @random_story.id %>)</small>
+<% if @characters.any? %>
+  <% @characters.each do |character| %>
+    <div class="row">
+      <div class="col-md-6" style="padding-right:20px; margin-top: 8px; border-right: 1px solid #ccc;">
+        <h1 class="my-4"><%= character.name %>
+          <small style="font-style: italic; color: #c6c6c6">(Id <%= character.id %>)</small>
         </h1>
         <div class="row">
-          <div class="col-md-12">
-            <p><%= @random_story.description %></p>
-            <h3 class="my-4">Characters</h3>
-            <div class="row">
-              <% @story_characters.each do |story_character| %>
-                <div class="col-md-3 col-sm-6 mb-4">
-                  <a href=<%= ERB::Util.url_encode(story_character.name) %>>
-                    <img class="img-fluid" src=<%= story_character.thumbnail %> alt=<%= story_character.name %>>
-                  </a>
-                  <p><%= story_character.name %></p>
-                </div>
-              <% end %>
-            </div>
+          <div class="col-md-6">
+            <img class="img-fluid" src=<%= character.thumbnail %> alt=<%= character.name %>>
+          </div>
+          <div class="col-md-6">
+            <p><%= character.description.to_s.empty? ? "No description available" : character.description  %></p>
           </div>
         </div>
       </div>
-    <% else %>
-      <div class="col-md-6" style="padding-right:20px; margin-top: 8px;">
-        </br>
-        </br>
-        </br>
-        <h1 class="my-4" style="font-style: italic; color: #c6c6c6">No stories found for this character</h1>
-      </div>
-    <% end %>
+      <% if @random_story %>
+        <div class="col-md-6" style="padding-right:20px; margin-top: 8px;">
+          <h1 class="my-4"><%= @random_story.name %>
+            <small style="font-style: italic; color: #c6c6c6">(Id <%= @random_story.id %>)</small>
+          </h1>
+          <div class="row">
+            <div class="col-md-12">
+              <p><%= @random_story.description %></p>
+              <h3 class="my-4">Characters</h3>
+              <div class="row">
+                <% @story_characters.each do |story_character| %>
+                  <div class="col-md-3 col-sm-6 mb-4">
+                    <a href=<%= ERB::Util.url_encode(story_character.name) %>>
+                      <img class="img-fluid" src=<%= story_character.thumbnail %> alt=<%= story_character.name %>>
+                    </a>
+                    <p><%= story_character.name %></p>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="col-md-6" style="padding-right:20px; margin-top: 8px;">
+          </br>
+          </br>
+          </br>
+          <h1 class="my-4" style="font-style: italic; color: #c6c6c6">No stories found for this character</h1>
+        </div>
+      <% end %>
+    </div>
+    </br>
+  <% end %>
+<% else %>
+  <div class="row" style="height: 426px;">
+    <div class="col-md-6" style="margin-top: 150px; font-style: italic; color: #c6c6c6">
+      <h1 class="my-4">Character not found</h1>
+    </div>
   </div>
-  </br>
 <% end %>
