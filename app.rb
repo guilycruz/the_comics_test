@@ -16,11 +16,11 @@ class App < Sinatra::Base
     name = params[:name]
     if name
       @characters = Character.find_by_name(name)
+      erb :characters_details
     else
       @characters = Character.all
+      erb :characters
     end
-    @susto = "XAXHUAXHUAHXUXH"
-    erb :characters
   end
 
   # start the server if ruby file executed directly

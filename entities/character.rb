@@ -1,8 +1,10 @@
 require 'json'
 require './services/marvel_api_service.rb'
+require './entities/concern/marvelable.rb'
+require './entities/story.rb'
 
 class Character
-  # include Concern::Marvelable
+  include Concern::Marvelable
   attr_accessor :id, :name, :description, :resource_uri, :thumbnail, :stories
 
   def initialize(params={})
@@ -12,24 +14,34 @@ class Character
     thumbnail = params['thumbnail']
     self.thumbnail = "#{thumbnail['path']}.#{thumbnail['extension']}" if thumbnail
     self.resource_uri = params['resourceURI']
+    stories = params['stories']
+    self.stories = Story.from_json(stories['items']) if stories
   end
 
   class << self
     def all
-      do_call
+      get_characters
     end
 
     def find_by_name(name)
-      do_call(name: name)
+      get_characters(name: name)
+    end
+
+    def from_json(stories_character)
+      stories_character.map do |character|
+        resource_uri = character['resourceURI']
+        # puts "URL: #{resource_uri}"
+        if resource_uri
+          id = resource_uri.split('/').last
+          character.merge!('id' => id)
+        end
+        self.new(character)
+      end
     end
 
   private
-    def do_call(args={})
-      path = "#{self.name.downcase}s"
-      params = { path: path }.merge(args)
-      data = JSON.parse(MarvelApiService.new.call(params))['data']
-      results = data['results']
-      characters = results.map { |c| Character.new(c) }
+    def get_characters(args={})
+      do_call(args)
     end
   end
 end

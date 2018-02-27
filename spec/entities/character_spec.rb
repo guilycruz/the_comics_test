@@ -9,6 +9,7 @@ shared_examples 'a valid record' do
   it { expect(character.description).not_to be_nil }
   it { expect(character.thumbnail).not_to be_nil }
   it { expect(character.resource_uri).not_to be_nil }
+  it { expect(character.resource_uri).not_to be_nil }
 end
 
 RSpec.describe Character, type: :model do

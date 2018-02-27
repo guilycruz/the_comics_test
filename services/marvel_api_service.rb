@@ -21,7 +21,7 @@ class MarvelApiService
 
     begin
       puts "URL: #{api_url}#{path}"
-      # puts "Params: #{params}"
+      puts "Params: #{params}"
       response = RestClient.get "#{api_url}#{path}", { params: params }
       # puts response.body
       response.body

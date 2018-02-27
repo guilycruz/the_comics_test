@@ -10,9 +10,10 @@
           <p><img src=<%= character.thumbnail %> alt=<%= character.name %> height="150" width="100"></p>
           <% if character.stories.any? %>
             <h3>Story</h3>
-            <% random_story = character.stories.sample %>
+            <% random_story = character.stories.sample.get_details %>
             <p><b><%= random_story.name %></b></p>
-            <p>id: <%= random_story.id %></p>
+            <p>Id: <%= random_story.id %></p>
+            <p>Description: <%= random_story.description %></p>
             <!-- <p><img src=<%= random_story.thumbnail %> alt=<%= random_story.name %> height="150" width="100"></p>   -->
           <% end %>
         <% end %>
