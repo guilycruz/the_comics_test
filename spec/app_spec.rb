@@ -2,27 +2,23 @@ require "spec_helper"
 require './app.rb'
 
 describe 'The Commics Test App' do
-  include Rack::Test::Methods
-
   def app
     App.new
-  end
-
-  it "displays home page" do
-    get '/'
-
-    expect(last_response.body).to include("Hello world!")
   end
 
   describe '/characters' do
     let(:name) { nil }
     context 'without informing any "name"' do
+      before {
+        expect_any_instance_of(MarvelApiService).
+          to receive(:call).
+            and_return(characters_api_response)
+      }
       subject(:get_characters) { get "/characters/#{name}"}
 
-      xit 'a list of characters' do
+      it 'reponds with OK' do
         get_characters
-        expect(last_response.body).to include("Spider-man")
-        expect(last_response.body).to include("Hulk")
+        expect(last_response.status).to eq(200)
       end
     end
   end

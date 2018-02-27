@@ -13,7 +13,7 @@
   <h1 class="my-4">Characters</h1>
   
   <% @characters.each do |character| %>
-    <div class="row">
+    <div id='character' class="row">
       <div class="col-md-2">
         <a href="#">
           <img class="img-fluid rounded mb-3 mb-md-0" src=<%= character.thumbnail %> alt=<%= character.name %>>

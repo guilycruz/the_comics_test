@@ -18,7 +18,7 @@ class App < Sinatra::Base
       end
       erb :characters_details, layout: :layout
     else
-      @characters = Character.all
+      @characters = Character.all(page: params[:page])
       erb :characters, layout: :layout
     end
   end

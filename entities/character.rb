@@ -8,6 +8,7 @@ class Character
   include Concern::Marvelable
   attr_accessor :id, :name, :description, :resource_uri, :thumbnail
 
+  CHARACTERS_LIMIT = 30
   STORIES_LIMIT = 15
 
   def initialize(params={})
@@ -24,8 +25,10 @@ class Character
   end
 
   class << self
-    def all
-      get_characters
+    def all(options={})
+      page = options[:page]
+      params = page ? { offset: CHARACTERS_LIMIT * page.to_i } : {}
+      get_characters(params)
     end
 
     def find_by_name(name)
