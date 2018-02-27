@@ -22,7 +22,7 @@
       <div class="col-md-9">
         <h3><%= character.name %></h3>
         <p><%= character.description %></p>
-        <a href=<%= "characters/" + ERB::Util.url_encode(character.name) %> class="btn btn-primary">View details</a>
+        <a href=<%= "/characters/" + ERB::Util.url_encode(character.name) %> class="btn btn-primary">View details</a>
       </div>
     </div>
     <hr>
