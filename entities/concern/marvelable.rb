@@ -4,9 +4,6 @@ module Concern
   module Marvelable
     def self.included(base)
     base.extend ClassMethods
-    # base.class_eval do
-    #   scope :disabled, -> { where(disabled: true) }
-    # end
   end
 
 
@@ -17,9 +14,16 @@ module Concern
         params = { path: path }.merge(args)
         # puts "URL: #{path}"
         # puts "Params: #{params}"
-        data = JSON.parse(MarvelApiService.new.call(params))['data']
+        response_hash = JSON.parse(MarvelApiService.new.call(params))
+        data = response_hash['data']
+        @attribution_text = response_hash['attributionText']
+        puts "CALL: #{@attribution_text}"
         results = data['results']
         characters = results.map { |c| klass.new(c) }
+      end
+
+      def attribution_text
+        @attribution_text
       end
 
       def format_URI(args)
