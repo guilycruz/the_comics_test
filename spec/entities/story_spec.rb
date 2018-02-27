@@ -10,23 +10,23 @@ RSpec.describe Story, type: :model do
     expect(story).to be_an_instance_of(Story)
   end
 
-  describe '.find_by_id' do
-    let(:id) { '19947' }
-
-    before do
-      expect_any_instance_of(MarvelApiService).
-        to receive(:call).
-            and_return(single_story_api_response)
-    end
-
-    subject(:find_by_id) { described_class.find_by_id(id) }
-    # subject(:character) { described_class.find_by_name(name).first }
-
-    it { expect(find_by_id).to be_a(Array) }
-    it { expect(find_by_id.size).to eq(1) }
-
-    # it_behaves_like 'a valid record'
-  end
+  # describe '.find_by_id' do
+  #   let(:id) { '19947' }
+  #
+  #   before do
+  #     expect_any_instance_of(MarvelApiService).
+  #       to receive(:call).
+  #           and_return(single_story_api_response)
+  #   end
+  #
+  #   subject(:find_by_id) { described_class.find_by_id(id) }
+  #   # subject(:character) { described_class.find_by_name(name).first }
+  #
+  #   it { expect(find_by_id).to be_a(Array) }
+  #   it { expect(find_by_id.size).to eq(1) }
+  #
+  #   # it_behaves_like 'a valid record'
+  # end
 
   describe '#characters' do
     let(:id) { '1018' }

@@ -31,18 +31,6 @@ class Character
       get_characters(name: name)
     end
 
-    def from_json(stories_character)
-      stories_character.map do |character|
-        resource_uri = character['resourceURI']
-        # puts "URL: #{resource_uri}"
-        if resource_uri
-          id = resource_uri.split('/').last
-          character.merge!('id' => id)
-        end
-        self.new(character)
-      end
-    end
-
   private
     def get_characters(args={})
       do_call(args)

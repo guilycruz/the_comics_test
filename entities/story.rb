@@ -4,7 +4,7 @@ require './entities/concern/marvelable.rb'
 
 class Story
   include Concern::Marvelable
-  attr_accessor :id, :name, :description, :resource_uri, :thumbnail#, :characters
+  attr_accessor :id, :name, :description, :resource_uri, :thumbnail
   PLURAL = 'stories'
   CHARACTERS_LIMIT = 25
 
@@ -23,14 +23,6 @@ class Story
   end
 
   class << self
-    def all
-      get_stories
-    end
-
-    def find_by_id(id)
-      get_stories(id: id)
-    end
-
     def find_by_character(id)
       get_stories(id: id)
     end
