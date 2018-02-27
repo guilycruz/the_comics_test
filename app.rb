@@ -14,7 +14,7 @@ class App < Sinatra::Base
         stories = @characters.first.stories
         random_story_with_description = stories.select { |cs| cs.description != "" }.sample
         @random_story = random_story_with_description ? random_story_with_description : stories.sample
-        @story_characters = @random_story.characters
+        @story_characters = @random_story.characters if @random_story
       end
       erb :characters_details, layout: :layout
     else

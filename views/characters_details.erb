@@ -9,7 +9,7 @@
           <img class="img-fluid" src=<%= character.thumbnail %> alt=<%= character.name %>>
         </div>
         <div class="col-md-6">
-          <p><%= character.description %></p>
+          <p><%= character.description.to_s.empty? ? "No description available" : character.description  %></p>
         </div>
       </div>
     </div>
@@ -34,6 +34,13 @@
             </div>
           </div>
         </div>
+      </div>
+    <% else %>
+      <div class="col-md-6" style="padding-right:20px; margin-top: 8px;">
+        </br>
+        </br>
+        </br>
+        <h1 class="my-4" style="font-style: italic; color: #c6c6c6">No stories found for this character</h1>
       </div>
     <% end %>
   </div>

@@ -21,7 +21,7 @@
       </div>
       <div class="col-md-9">
         <h3><%= character.name %></h3>
-        <p><%= character.description %></p>
+        <p><%= character.description.to_s.empty? ? "No description available" : character.description  %></p>
         <a href=<%= "/characters/" + ERB::Util.url_encode(character.name) %> class="btn btn-primary">View details</a>
       </div>
     </div>
