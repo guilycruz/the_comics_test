@@ -3,7 +3,7 @@ require './entities/character.rb'
 
 class App < Sinatra::Base
   get '/' do
-    'Hello world!'
+    erb :index, layout: :layout
   end
 
   get '/characters/?:name?' do
@@ -16,10 +16,10 @@ class App < Sinatra::Base
         @random_story = random_story_with_description ? random_story_with_description : stories.sample
         @story_characters = @random_story.characters
       end
-      erb :characters_details
+      erb :characters_details, layout: :layout
     else
       @characters = Character.all
-      erb :characters
+      erb :characters, layout: :layout
     end
   end
 

@@ -1,4 +1,5 @@
 require 'json'
+require 'open-uri'
 require './services/marvel_api_service.rb'
 require './entities/concern/marvelable.rb'
 require './entities/story.rb'

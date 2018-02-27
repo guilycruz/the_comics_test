@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Comics Test</title>
+    </head>
+    <body>
+        <% @characters.each do |character| %>
+          <h1> <%= character.name %></h1>
+          <p>Description: <%= character.description %> </p>
+          <p><img src=<%= character.thumbnail %> alt=<%= character.name %> height="200" width="180"></p>
+          <% if @random_story %>
+            <h3>Story</h3>            
+            <p><b><%= @random_story.name %></b></p>
+            <p>Id: <%= @random_story.id %></p>
+            <p>Description: <%= @random_story.description %></p>
+            <% @story_characters.each do |story_character| %>
+              <p><img src=<%= story_character.thumbnail %> alt=<%= story_character.name %> height="120" width="100"></p>
+              <p> <%= story_character.name %></p>
+            <% end %>
+          <% end %>
+        <% end %>
+    </body>
+</html>

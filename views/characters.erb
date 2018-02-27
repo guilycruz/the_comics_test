@@ -4,10 +4,58 @@
         <title>The Comics Test</title>
     </head>
     <body>
-        <% @characters.each do |character| %>
-          <h1> <%= character.name %></h1>
-          <p>Description: <%= character.description %> </p>
-          <p><img src=<%= character.thumbnail %> alt=<%= character.name %> height="150" width="100"></p>
-        <% end %>
+  
     </body>
 </html>
+
+<div class="container">
+
+  <h1 class="my-4">Characters</h1>
+  
+  <% @characters.each do |character| %>
+    <div class="row">
+      <div class="col-md-2">
+        <a href="#">
+          <img class="img-fluid rounded mb-3 mb-md-0" src=<%= character.thumbnail %> alt=<%= character.name %>>
+        </a>
+      </div>
+      <div class="col-md-9">
+        <h3><%= character.name %></h3>
+        <p><%= character.description %></p>
+        <a href=<%= "characters/" + ERB::Util.url_encode(character.name) %> class="btn btn-primary">View details</a>
+      </div>
+    </div>
+    <hr>
+  <% end %>
+
+  <!-- /.row -->
+
+
+
+  <!-- Pagination -->
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">1</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">2</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">3</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
+
+</div>
+<!-- /.container -->

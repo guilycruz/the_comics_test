@@ -10,7 +10,7 @@ class Story
 
   def initialize(params={})
     self.id = params['id']
-    self.name = params['name']
+    self.name = params['title']
     self.description = params['description']
     thumbnail = params['thumbnail']
     self.thumbnail = "#{thumbnail['path']}.#{thumbnail['extension']}" if thumbnail
