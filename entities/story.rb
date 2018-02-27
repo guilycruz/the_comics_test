@@ -4,8 +4,9 @@ require './entities/concern/marvelable.rb'
 
 class Story
   include Concern::Marvelable
-  attr_accessor :id, :name, :description, :resource_uri, :thumbnail, :characters
+  attr_accessor :id, :name, :description, :resource_uri, :thumbnail#, :characters
   PLURAL = 'stories'
+  CHARACTERS_LIMIT = 25
 
   def initialize(params={})
     self.id = params['id']
@@ -15,16 +16,10 @@ class Story
     self.thumbnail = "#{thumbnail['path']}.#{thumbnail['extension']}" if thumbnail
     self.resource_uri = params['resourceURI']
     characters = params['characters']
-    self.characters = Character.from_json(characters['items']) if characters
-    # puts "CHARACTERS ITEMS: #{self.characters}"
   end
 
-  def get_details
-    story = Story.find_by_id(self.id).first
-    self.description = story.description
-    self.thumbnail = story.thumbnail
-    self.characters = story.characters
-    self
+  def characters
+    get_characters(id: self.id)
   end
 
   class << self
@@ -44,20 +39,15 @@ class Story
       PLURAL
     end
 
-    def from_json(character_stories)
-      character_stories.map do |story|
-        resource_uri = story['resourceURI']
-        if resource_uri
-          id = resource_uri.split('/').last
-          story.merge!('id' => id)
-        end
-        self.new(story)
-      end
-    end
-
   private
     def get_stories(args={})
       do_call(args)
     end
+  end
+
+private
+  def get_characters(args={})
+    args.merge!(limit: CHARACTERS_LIMIT, nested: Character)
+    Story.do_call(args)
   end
 end

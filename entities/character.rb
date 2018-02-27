@@ -16,8 +16,6 @@ class Character
     thumbnail = params['thumbnail']
     self.thumbnail = "#{thumbnail['path']}.#{thumbnail['extension']}" if thumbnail
     self.resource_uri = params['resourceURI']
-    #stories = params['stories']
-    #self.stories = Story.from_json(stories['items']) if stories
   end
 
   def stories
