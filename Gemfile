@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 gem 'sinatra'
 gem 'rest-client'
+gem 'sinatra-contrib'
 # gem "activesupport", :require => "active_support"
 
 group :test do

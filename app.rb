@@ -1,10 +1,10 @@
 require 'sinatra/base'
+require 'sinatra/config_file'
 require './entities/character.rb'
 
 class App < Sinatra::Base
-  get '/' do
-    erb :index, layout: :layout
-  end
+  register Sinatra::ConfigFile
+  config_file 'config.yml'
 
   get '/characters/?:name?' do
     name = params[:name]
