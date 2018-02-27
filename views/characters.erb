@@ -8,13 +8,6 @@
           <h1> <%= character.name %></h1>
           <p>Description: <%= character.description %> </p>
           <p><img src=<%= character.thumbnail %> alt=<%= character.name %> height="150" width="100"></p>
-          <% if character.stories.any? %>
-            <h3>Story</h3>
-            <% random_story = character.stories.sample %>
-            <p><b><%= random_story.name %></b></p>
-            <p>id: <%= random_story.id %></p>
-            <!-- <p><img src=<%= random_story.thumbnail %> alt=<%= random_story.name %> height="150" width="100"></p>   -->
-          <% end %>
         <% end %>
     </body>
 </html>

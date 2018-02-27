@@ -12,18 +12,29 @@ module Concern
 
     module ClassMethods
       def do_call(args={})
-        plural = self.plural if self.respond_to?(:plural)
-        if plural
-          path = "#{plural}"
-        else
-          path = "#{self.name.downcase}s"
-        end
-        id = args.delete(:id)
-        path += "/#{id}" if id
+        klass = args[:nested] ? args[:nested] : self
+        path = format_URI(args)
         params = { path: path }.merge(args)
+        # puts "URL: #{path}"
+        # puts "Params: #{params}"
         data = JSON.parse(MarvelApiService.new.call(params))['data']
         results = data['results']
-        characters = results.map { |c| self.new(c) }
+        characters = results.map { |c| klass.new(c) }
+      end
+
+      def format_URI(args)
+        pluralize(self) + extract_id(args) + pluralize(args.delete(:nested))
+      end
+
+      def pluralize(klass)
+        return "" unless klass
+        plural = klass.respond_to?(:plural) ? klass.plural : "#{klass.name.downcase}s"
+      end
+
+      def extract_id(args)
+        id = args.delete(:id)
+        return "" unless id
+        "/#{id}/"
       end
     end
 

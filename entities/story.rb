@@ -36,6 +36,10 @@ class Story
       get_stories(id: id)
     end
 
+    def find_by_character(id)
+      get_stories(id: id)
+    end
+
     def plural
       PLURAL
     end

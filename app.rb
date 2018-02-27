@@ -7,15 +7,14 @@ class App < Sinatra::Base
   end
 
   get '/characters/?:name?' do
-    # if params[:user].nil?
-    #    redirect '/'
-    # else
-    #    @user = params[:user]
-    #    erb :welcome_user
-    # end
     name = params[:name]
     if name
       @characters = Character.find_by_name(name)
+      if @characters.any?
+        stories = @characters.first.stories
+        random_story_with_description = stories.select { |cs| cs.description != "" }.sample
+        @random_story = random_story_with_description ? random_story_with_description : stories.sample
+      end
       erb :characters_details
     else
       @characters = Character.all

@@ -57,4 +57,24 @@ RSpec.describe Character, type: :model do
 
     it_behaves_like 'a valid record'
   end
+
+  describe '#stories' do
+    let(:id) { '1009610' }
+
+    before do
+      character.id = id
+      expect_any_instance_of(MarvelApiService).
+        to receive(:call).
+          with(path: "#{described_class.name.downcase}s/#{id}/stories", limit: described_class::STORIES_LIMIT).
+            and_return(character_stories_api_response)
+    end
+
+    subject(:stories) { character.stories }
+
+    it { expect(stories).to be_a(Array) }
+    it { expect(stories).not_to be_empty }
+    it { expect(stories[0]).to be_a(Story) }
+
+    # it_behaves_like 'a valid record'
+  end
 end
