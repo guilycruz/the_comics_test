@@ -17,7 +17,6 @@ module Concern
         response_hash = JSON.parse(MarvelApiService.new.call(params))
         data = response_hash['data']
         @attribution_text = response_hash['attributionText']
-        puts "CALL: #{@attribution_text}"
         results = data['results']
         characters = results.map { |c| klass.new(c) }
       end
